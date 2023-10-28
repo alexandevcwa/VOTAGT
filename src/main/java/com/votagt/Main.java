@@ -2,23 +2,30 @@ package com.votagt;
 
 import com.ormfile.exeption.OrmFileDbSetException;
 import com.ormfile.orm.OrmFileRecord;
-import com.sun.jdi.PrimitiveValue;
 import com.votagt.model.DatabaseContext;
 import com.votagt.model.dto.Rol;
 import com.votagt.model.dto.Usuario;
 import com.votagt.model.dto.UsuariosRoles;
 import com.votagt.model.dto.Votante;
 
-import javax.lang.model.util.ElementScanner6;
-import java.io.FileNotFoundException;
+import javax.crypto.spec.PSource;
+import java.io.Console;
 import java.io.IOException;
 import java.util.*;
 
 public class Main {
 
+    /**
+     * Context para obtener, insertar y crear base de datos basada en archivos
+     */
     private static DatabaseContext databaseContext = new DatabaseContext();
+    /**
+     * Scanner para ontemer datos del usuario
+     */
     private static Scanner scanner = new Scanner(System.in);
-
+    /**
+     * roles permitidos para que el usuario opere en el sistema
+     */
     private static ArrayList<Integer> roles = new ArrayList<>();
 
     public static void main(String[] args) throws IOException {
@@ -32,16 +39,27 @@ public class Main {
         }
     }
 
+    /**
+     * Muestra banner el software
+     */
     private static void banner() {
-        System.out.println("____    ____   ______   .___________.     ___        _______ .___________.\n" +
-                "\\   \\  /   /  /  __  \\  |           |    /   \\      /  _____||           |\n" +
-                " \\   \\/   /  |  |  |  | `---|  |----`   /  ^  \\    |  |  __  `---|  |----`\n" +
-                "  \\      /   |  |  |  |     |  |       /  /_\\  \\   |  | |_ |     |  |     \n" +
-                "   \\    /    |  `--'  |     |  |      /  _____  \\  |  |__| |     |  |     \n" +
-                "    \\__/      \\______/      |__|     /__/     \\__\\  \\______|     |__|     \n" +
-                "                                                                          ");
+        System.out.println(" █████   █████    ███████    ███████████   █████████     █████████  ███████████\n" +
+                "░░███   ░░███   ███░░░░░███ ░█░░░███░░░█  ███░░░░░███   ███░░░░░███░█░░░███░░░█\n" +
+                " ░███    ░███  ███     ░░███░   ░███  ░  ░███    ░███  ███     ░░░ ░   ░███  ░ \n" +
+                " ░███    ░███ ░███      ░███    ░███     ░███████████ ░███             ░███    \n" +
+                " ░░███   ███  ░███      ░███    ░███     ░███░░░░░███ ░███    █████    ░███    \n" +
+                "  ░░░█████░   ░░███     ███     ░███     ░███    ░███ ░░███  ░░███     ░███    \n" +
+                "    ░░███      ░░░███████░      █████    █████   █████ ░░█████████     █████   \n" +
+                "     ░░░         ░░░░░░░       ░░░░░    ░░░░░   ░░░░░   ░░░░░░░░░     ░░░░░    \n" +
+                "                                                                               ");
     }
 
+    /**
+     * Verificar si el el primer arranque el sistema
+     *
+     * @return True si es el primer arranque del sistema, deja agregar valores para el usuario administrador
+     * del sistema y ina contraseña, luego de esto siempre requerira credenciales
+     */
     private static boolean firstStartUp(String buildTag) throws IOException {
 
         if (buildTag.equals("-db")) {
@@ -89,7 +107,15 @@ public class Main {
     private static void login() {
         System.out.println("\n[1] INICIO DE SESESIÓN COMO USUARIO");
         System.out.println("[2] INICIO DE SESION COMO VOTANTE");
-        int tipoInicioSesion = scanner.nextInt();
+
+        int tipoInicioSesion;
+        try {
+            tipoInicioSesion = scanner.nextInt();
+        } catch (InputMismatchException e) {
+            System.out.println("[ERROR] " + e.getMessage().toUpperCase());
+            return;
+        }
+
         System.out.println("[INFO] INGRESE SU CORREO ELECTRONICO");
         String value = scanner.next();
 
@@ -147,6 +173,7 @@ public class Main {
                 result.forEach(grant -> {
                     roles.add(Integer.parseInt(grant[1]));
                 });
+                displayMenu();
             } else {
                 System.out.println("[ERROR] EL USUARIO NO TIENE PERMISOS PARA ACCEDER AL SITEMA");
             }
@@ -155,7 +182,160 @@ public class Main {
         }
     }
 
+    /**
+     * Desplegar menu del sistema
+     */
     private static void displayMenu() {
+        int option = -1;
 
+        while (option != 99) {
+            System.out.println("• ▌ ▄ ·. ▄▄▄ . ▐ ▄ ▄• ▄▌\n" +
+                    "·██ ▐███▪▀▄.▀·•█▌▐██▪██▌\n" +
+                    "▐█ ▌▐▌▐█·▐▀▀▪▄▐█▐▐▌█▌▐█▌\n" +
+                    "██ ██▌▐█▌▐█▄▄▌██▐█▌▐█▄█▌\n" +
+                    "▀▀  █▪▀▀▀ ▀▀▀ ▀▀ █▪ ▀▀▀ ");
+            System.out.println("[MENU] INGRESA UN APARTADO DEL SISTEMA QUE DESEAS INGRESAR");
+
+            System.out.println("[1] ADMINISTRAR USUARIOSN\n" +
+                    "[2] CONTEO DE VOTOS\n" +
+                    "[3] EMISIÓN DE VOTO\n" +
+                    "[4] GESTION DE CANDIDATOS\n" +
+                    "[5] GESTION DE ELECCIONES\n" +
+                    "[6] ADMINISTRAR VOTANTES\n" +
+                    "[99] SALIR");
+
+            option = scanner.nextInt();
+            switch (option) {
+                case 1:
+                    if (roles.contains(0)) {
+                        //TODO logica para administrar usuarios
+                        managerUsers();
+                    } else {
+                        System.out.println("[ALERTA] NO TIENES LOS PERMISOS SUFICIENTES PARA ACCEDER A ESTA OPTIÓN");
+                    }
+                    break;
+                default:
+                    if (option != 99) {
+                        System.out.println("[ERROR] OPCIÓN INGRESADA ES INVALIDA");
+                    }
+                    break;
+            }
+        }
+    }
+
+    /**
+     * Administrar usuarios del sistema
+     */
+    private static void managerUsers() {
+        int option = -1;
+        while (option != 99) {
+
+            System.out.println(" ▄▄▄· ·▄▄▄▄  • ▌ ▄ ·. ▪   ▐ ▄ ▪  .▄▄ · ▄▄▄▄▄▄▄▄   ▄▄▄· ▄▄▄      ▄• ▄▌.▄▄ · ▄• ▄▌ ▄▄▄· ▄▄▄  ▪        .▄▄ · \n" +
+                    "▐█ ▀█ ██▪ ██ ·██ ▐███▪██ •█▌▐███ ▐█ ▀. •██  ▀▄ █·▐█ ▀█ ▀▄ █·    █▪██▌▐█ ▀. █▪██▌▐█ ▀█ ▀▄ █·██ ▪     ▐█ ▀. \n" +
+                    "▄█▀▀█ ▐█· ▐█▌▐█ ▌▐▌▐█·▐█·▐█▐▐▌▐█·▄▀▀▀█▄ ▐█.▪▐▀▀▄ ▄█▀▀█ ▐▀▀▄     █▌▐█▌▄▀▀▀█▄█▌▐█▌▄█▀▀█ ▐▀▀▄ ▐█· ▄█▀▄ ▄▀▀▀█▄\n" +
+                    "▐█ ▪▐▌██. ██ ██ ██▌▐█▌▐█▌██▐█▌▐█▌▐█▄▪▐█ ▐█▌·▐█•█▌▐█ ▪▐▌▐█•█▌    ▐█▄█▌▐█▄▪▐█▐█▄█▌▐█ ▪▐▌▐█•█▌▐█▌▐█▌.▐▌▐█▄▪▐█\n" +
+                    " ▀  ▀ ▀▀▀▀▀• ▀▀  █▪▀▀▀▀▀▀▀▀ █▪▀▀▀ ▀▀▀▀  ▀▀▀ .▀  ▀ ▀  ▀ .▀  ▀     ▀▀▀  ▀▀▀▀  ▀▀▀  ▀  ▀ .▀  ▀▀▀▀ ▀█▄▀▪ ▀▀▀▀ ");
+            System.out.println("[MENU] SELECCIONA EL APARTADO QUE AL QUE DESEAS INGRESAR");
+            System.out.println("[1] AGREGAR NUEVO USUARIO\n" +
+                    "[2] DESHABILITAR USUARIO\n" +
+                    "[3] EDUTAR USUARIO\n" +
+                    "[99] SALIR");
+
+            option = scanner.nextInt();
+            switch (option) {
+                case 1:
+                    addNewUser();
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    /**
+     * Registrar nuevo usuario en el sistema
+     */
+    private static void addNewUser() {
+        Usuario usuario = new Usuario();
+        System.out.println("[USUARIO] INGRESA PRIMER NOMBRE");
+        usuario.setNombre(scanner.next());
+        System.out.println("[USUARIO] INGRESA PRIMER APELLIDO");
+        usuario.setApellido(scanner.next());
+        System.out.println("[USUARIO] INGRESA CORREO ELECTRONICO");
+        usuario.setEmail(scanner.next());
+        System.out.println("[USUARIO] INGRESA UNA CONTRASEÑA");
+        Console console = System.console();
+        if (console != null) {
+            char[] passwordArray = console.readPassword("[PASSWORD] : ");
+            String password = new String(passwordArray);
+            usuario.setPassword(password);
+        } else {
+            usuario.setPassword(scanner.next());
+        }
+        usuario.setStatus(true);
+
+        try {
+            if (databaseContext.insert(new OrmFileRecord<Usuario>(usuario)).save(Usuario.class)) {
+                System.out.println("[DB] USUARIO GUARDADO CORRECTAMENTE");
+            }
+        } catch (IllegalAccessException | IOException e) {
+            throw new RuntimeException(e);
+        } catch (UnsupportedOperationException e) {
+            System.out.println("[ERROR FROM DB] " + e.getMessage().toUpperCase());
+        }
+
+        //ASIGNARLE ROLES AL USARIO
+        while (!setUserRoles(usuario)) {
+            System.out.println("[ROLES] VUELVE A INTENTAR ASIGNARLE ROLES AL USUARIO");
+        }
+    }
+
+    /**
+     * Registro de roles para el un usuario nuevo
+     *
+     * @param usuario Usuario registrado a quien se le van a asignar roles
+     * @see Usuario
+     */
+    private static boolean setUserRoles(Usuario usuario) {
+        System.out.println("[USUARIO ROLES] ASIGNALE ROLES AL USUARIO AGREGADO\n" +
+                "0 - ADMINISTRADOR\n" +
+                "1 - AUDITOR\n" +
+                "2 - REGISTRADOR\n" +
+                "3 - VOTANTE\n" +
+                "[INFO] ASINGALE ROLES SEPARADOS POR COMAS, EJEMPLO -> 1,2,3,4");
+        String roles = scanner.next();
+        String[] rolesArray = roles.split(",", 4);
+        for (String rol : rolesArray) {
+            char[] rolCharArray = rol.toCharArray();
+            if (rolCharArray.length > 1) {
+                System.out.println("[ALERTA] FORMATO DE ASIGNACIÓN DE ROLES INCORRECTO");
+                return false;
+            }
+            if (rolCharArray.length == 1 && rolCharArray[0] >= 48 && rolCharArray[0] <= 52) {
+
+                UsuariosRoles usuariosRoles = new UsuariosRoles();
+                usuariosRoles.setUsuario(usuario);
+
+                Rol usrRol = new Rol();
+                usrRol.setId(Integer.parseInt(String.valueOf(rolCharArray[0])));
+                usuariosRoles.setRol(usrRol);
+
+                try {
+                    if (databaseContext.insert(new OrmFileRecord<UsuariosRoles>(usuariosRoles)).save(UsuariosRoles.class)) {
+                        System.out.println("[DB] ROLL [" + String.valueOf(rolCharArray[0]) + "] ASIGNADO CORRECTAMENTE");
+                    }
+                } catch (IllegalAccessException | IOException e) {
+                    throw new RuntimeException(e);
+                }
+            } else {
+                System.out.println("[ALERTA] FORMATO DE ASIGNACIÓN DE ROLES INCORRECTO");
+                return false;
+            }
+        }
+        return true;
     }
 }
