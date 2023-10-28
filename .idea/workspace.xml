@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3e53df93-0121-4335-9e2f-b111e3cc411e" name="Changes" comment="Se creo funcionalidad para registrar a usuarios y votantes en el sistema">
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/VOTAGT-1.0.0.jar" beforeDir="false" />
-    </list>
+    <list default="true" id="3e53df93-0121-4335-9e2f-b111e3cc411e" name="Changes" comment="Se creo funcionalidad para registrar a usuarios y votantes en el sistema" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -94,7 +91,7 @@
       <updated>1698459940113</updated>
       <workItem from="1698459941171" duration="28312000" />
       <workItem from="1698489019688" duration="3617000" />
-      <workItem from="1698493653289" duration="518000" />
+      <workItem from="1698493653289" duration="658000" />
     </task>
     <task id="LOCAL-00001" summary="Funcionalidad de Login">
       <option name="closed" value="true" />
@@ -120,7 +117,15 @@
       <option name="project" value="LOCAL" />
       <updated>1698488846150</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Se creo funcionalidad para registrar a usuarios y votantes en el sistema">
+      <option name="closed" value="true" />
+      <created>1698494192837</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1698494192837</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
