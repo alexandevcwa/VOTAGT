@@ -4,10 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3e53df93-0121-4335-9e2f-b111e3cc411e" name="Changes" comment="Funcionalidad de Login">
+    <list default="true" id="3e53df93-0121-4335-9e2f-b111e3cc411e" name="Changes" comment="Se creo funcionalidad para registrar a usuarios y votantes en el sistema">
+      <change afterPath="$PROJECT_DIR$/lib/ORMFile-1.0.0.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/votagt/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/votagt/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/votagt/model/dto/Votante.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/votagt/model/dto/Votante.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,9 +21,9 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 1
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 1
+}</component>
   <component name="ProjectId" id="2XNC1pQjReVH8RzdVLTQ4iWofRg" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -36,24 +37,34 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "C:/Users/alexa/Source Code/Java Projects/ORMFile/target/ORMFile-1.0.0.jar",
+    "last_opened_file_path": "C:/Users/alexa/Source Code/Java Projects/VOTAGT/lib",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "onboarding.tips.debug.path": "C:/Users/alexa/Source Code/Java Projects/VOTAGT/src/main/java/org/votagt/Main.java",
-    "project.structure.last.edited": "Modules",
+    "project.structure.last.edited": "Global Libraries",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.40520832",
+    "settings.editor.selected.configurable": "preferences.lookFeel",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\alexa\Source Code\Java Projects\VOTAGT\lib" />
+      <recent name="C:\Users\alexa\Source Code\Java Projects\VOTAGT" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\alexa\Source Code\Java Projects\VOTAGT\src\main\java\com\votagt" />
       <recent name="C:\Users\alexa\Source Code\Java Projects\VOTAGT\src\main\java" />
     </key>
+  </component>
+  <component name="RunAnythingCache">
+    <option name="myCommands">
+      <command value="mvn dependency:copy-dependencies" />
+    </option>
   </component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
@@ -83,7 +94,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1698459940113</updated>
-      <workItem from="1698459941171" duration="27950000" />
+      <workItem from="1698459941171" duration="28312000" />
+      <workItem from="1698489019688" duration="3617000" />
     </task>
     <task id="LOCAL-00001" summary="Funcionalidad de Login">
       <option name="closed" value="true" />
@@ -101,7 +113,15 @@
       <option name="project" value="LOCAL" />
       <updated>1698482669889</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Se creo funcionalidad para registrar a usuarios y votantes en el sistema">
+      <option name="closed" value="true" />
+      <created>1698488846150</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1698488846150</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -109,6 +129,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Funcionalidad de Login" />
-    <option name="LAST_COMMIT_MESSAGE" value="Funcionalidad de Login" />
+    <MESSAGE value="Se creo funcionalidad para registrar a usuarios y votantes en el sistema" />
+    <option name="LAST_COMMIT_MESSAGE" value="Se creo funcionalidad para registrar a usuarios y votantes en el sistema" />
   </component>
 </project>

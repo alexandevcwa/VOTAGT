@@ -4,11 +4,8 @@ import com.ormfile.exeption.OrmFileDbSetException;
 import com.ormfile.orm.OrmFileRecord;
 import com.votagt.model.DatabaseContext;
 import com.votagt.model.dto.*;
-
-import javax.crypto.spec.PSource;
 import java.io.Console;
 import java.io.IOException;
-import java.security.cert.TrustAnchor;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
