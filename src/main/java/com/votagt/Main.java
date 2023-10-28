@@ -3,14 +3,14 @@ package com.votagt;
 import com.ormfile.exeption.OrmFileDbSetException;
 import com.ormfile.orm.OrmFileRecord;
 import com.votagt.model.DatabaseContext;
-import com.votagt.model.dto.Rol;
-import com.votagt.model.dto.Usuario;
-import com.votagt.model.dto.UsuariosRoles;
-import com.votagt.model.dto.Votante;
+import com.votagt.model.dto.*;
 
 import javax.crypto.spec.PSource;
 import java.io.Console;
 import java.io.IOException;
+import java.security.cert.TrustAnchor;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class Main {
@@ -214,6 +214,13 @@ public class Main {
                         System.out.println("[ALERTA] NO TIENES LOS PERMISOS SUFICIENTES PARA ACCEDER A ESTA OPTIÓN");
                     }
                     break;
+                case 6:
+                    if (roles.contains(0) || roles.contains(2)) {
+                        managerVoters();
+                    } else {
+                        System.out.println("[ALERTA] NO TIENES LOS PERMISOS SUFICIENTES PARA ACCEDER A ESTA OPTIÓN");
+                    }
+                    break;
                 default:
                     if (option != 99) {
                         System.out.println("[ERROR] OPCIÓN INGRESADA ES INVALIDA");
@@ -337,5 +344,106 @@ public class Main {
             }
         }
         return true;
+    }
+
+    private static void managerVoters() {
+        int option = -1;
+        while (option != 99) {
+
+            System.out.println(" ▄▄▄· ·▄▄▄▄  • ▌ ▄ ·. ▪   ▐ ▄ ▪  .▄▄ · ▄▄▄▄▄▄▄▄   ▄▄▄· ▄▄▄       ▌ ▐·      ▄▄▄▄▄ ▄▄▄·  ▐ ▄ ▄▄▄▄▄▄▄▄ ..▄▄ · \n" +
+                    "▐█ ▀█ ██▪ ██ ·██ ▐███▪██ •█▌▐███ ▐█ ▀. •██  ▀▄ █·▐█ ▀█ ▀▄ █·    ▪█·█▌▪     •██  ▐█ ▀█ •█▌▐█•██  ▀▄.▀·▐█ ▀. \n" +
+                    "▄█▀▀█ ▐█· ▐█▌▐█ ▌▐▌▐█·▐█·▐█▐▐▌▐█·▄▀▀▀█▄ ▐█.▪▐▀▀▄ ▄█▀▀█ ▐▀▀▄     ▐█▐█• ▄█▀▄  ▐█.▪▄█▀▀█ ▐█▐▐▌ ▐█.▪▐▀▀▪▄▄▀▀▀█▄\n" +
+                    "▐█ ▪▐▌██. ██ ██ ██▌▐█▌▐█▌██▐█▌▐█▌▐█▄▪▐█ ▐█▌·▐█•█▌▐█ ▪▐▌▐█•█▌     ███ ▐█▌.▐▌ ▐█▌·▐█ ▪▐▌██▐█▌ ▐█▌·▐█▄▄▌▐█▄▪▐█\n" +
+                    " ▀  ▀ ▀▀▀▀▀• ▀▀  █▪▀▀▀▀▀▀▀▀ █▪▀▀▀ ▀▀▀▀  ▀▀▀ .▀  ▀ ▀  ▀ .▀  ▀    . ▀   ▀█▄▀▪ ▀▀▀  ▀  ▀ ▀▀ █▪ ▀▀▀  ▀▀▀  ▀▀▀▀ ");
+            System.out.println("[MENU] SELECCIONA EL APARTADO QUE AL QUE DESEAS INGRESAR");
+            System.out.println("[1] AGREGAR NUEVO VOTANTE\n" +
+                    "[2] DESHABILITAR POR FALLECIMIENTO\n" +
+                    "[3] EDITAR DATOS DE VOTANTE\n" +
+                    "[99] SALIR");
+
+            option = scanner.nextInt();
+            switch (option) {
+                case 1:
+                    addNewVoter();
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    private static void addNewVoter() {
+        Votante votante = new Votante();
+
+        System.out.println("[VOTANTE] INGRESE NO. DE CUI");
+        votante.setCui(scanner.next());
+
+        System.out.println("[VOTANTE] TIPO DE SEXO (M,F)");
+        String sexo = scanner.next();
+        if (sexo.equals("M")) {
+            votante.setSexo(true);
+        } else if (sexo.equals("F")) {
+            votante.setSexo(false);
+        }
+
+        System.out.println("[VOTANTE] INGRESA FECHA DE NACIMIENTO CON EL SIGUIENTE PATRÓN DD/MM/AAAA");
+        String fechaNacimiento = scanner.next();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate fechaLocal = LocalDate.parse(fechaNacimiento, formatter);
+        votante.setFechaNacimiento(fechaLocal);
+
+        System.out.println("[USUARIO] INGRESA UNA DIRECCION");
+        votante.setDireccion(scanner.next());
+
+        System.out.println("[USUARIO] SELECCIONA EL PAIS AL QUE PERTENECES");
+
+        try {
+            databaseContext.select(Pais.class).getAllRecords().forEach(pais -> {
+                System.out.println(pais[0] + " - " + pais[1]);
+            });
+
+            int value = scanner.nextInt();
+
+            System.out.println("[USUARIO] SELECCIONA EL DEPARTAMENTO AL QUE PERTENECES");
+            databaseContext.select(Departamento.class).getRecordByColumn(Departamento.class.getDeclaredField("pais"))
+                    .where(value).forEach(departamento -> {
+                        System.out.println(departamento[0] + " - " + departamento[1]);
+                    });
+            value = scanner.nextInt();
+
+            System.out.println("[USUARIO] SELECCIONA EL MUNICIPIO AL QUE PERTENECES");
+            databaseContext.select(Municipio.class).getRecordByColumn(Municipio.class.getDeclaredField("departamento"))
+                    .where(value).forEach(municpio -> {
+                        System.out.println(municpio[0] + " - " + municpio[1]);
+                    });
+            value = scanner.nextInt();
+            Municipio municipio = new Municipio();
+            municipio.setId(value);
+            votante.setMunicipio(municipio);
+
+        } catch (IOException | OrmFileDbSetException | NoSuchFieldException e) {
+            throw new RuntimeException(e);
+        }
+
+        System.out.println("[USUARIO] INGRESA PRIMER NOMBRE");
+        votante.setNombre(scanner.next());
+        System.out.println("[USUARIO] INGRESA PRIMER APELLIDO");
+        votante.setApellido(scanner.next());
+        System.out.println("[USUARIO] INGRESA CORREO ELECTRONICO");
+        votante.setEmail(scanner.next());
+        System.out.println("[USUARIO] INGRESA UNA CONTRASEÑA");
+        votante.setPassword(scanner.next());
+        votante.setStatus(true);
+
+        try {
+            databaseContext.insert(new OrmFileRecord<Votante>(votante)).save(Votante.class);
+            System.out.println("[DB] VOTANTE REGISTRADO CORRECTAMENTE");
+        } catch (IllegalAccessException | IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

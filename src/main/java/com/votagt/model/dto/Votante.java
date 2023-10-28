@@ -26,8 +26,8 @@ public class Votante {
     /**
      * Sexo del votante
      */
-    @OrmFileColumn(dataType = OrmFileDataTypesToString.FLOAT_STRING)
-    private float sexo;
+    @OrmFileColumn(dataType = OrmFileDataTypesToString.BOOL_STRING)
+    private boolean sexo;
 
     /**
      * Fecha de nacimiento del votante
@@ -52,33 +52,35 @@ public class Votante {
      * Nombre
      */
     @OrmFileColumn(dataType = OrmFileDataTypesToString.STRING_STRING)
-    protected String nombre;
+    public String nombre;
 
     /**
      * Apellido
      */
     @OrmFileColumn(dataType = OrmFileDataTypesToString.STRING_STRING)
-    protected String apellido;
+    public String apellido;
 
     /**
      * Correo electrónico
      */
     @OrmFileColumn(dataType = OrmFileDataTypesToString.STRING_STRING, isUnique = true)
-    protected String email;
+    public String email;
 
     /**
      * Contraseña
      */
     @OrmFileColumn(dataType = OrmFileDataTypesToString.STRING_STRING)
-    protected String password;
+    public String password;
 
     /**
      * Estado, (Activo = True, Inactivo = False)
      */
     @OrmFileColumn(dataType = OrmFileDataTypesToString.BOOL_STRING)
-    protected boolean status;
+    public boolean status;
 
-    private ArrayList<Voto> votos;
+    //TODO: Falta la propiedad ROL que define que el votante pertenece a un rol del sistema
+
+    private ArrayList<Voto> votos = new ArrayList<>();
 
     public String getCui() {
         return cui;
@@ -88,11 +90,11 @@ public class Votante {
         this.cui = cui;
     }
 
-    public float getSexo() {
+    public boolean getSexo() {
         return sexo;
     }
 
-    public void setSexo(float sexo) {
+    public void setSexo(boolean sexo) {
         this.sexo = sexo;
     }
 

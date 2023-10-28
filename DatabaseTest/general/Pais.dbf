@@ -1,0 +1,20 @@
+COLUMN_NAME=id:DATA_TYPE=INT_STRING:UNIQUE=false:PK_NAME=id_PK|COLUMN_NAME=descripcion:DATA_TYPE=STRING_STRING:UNIQUE=true|
+1|Canadá
+2|Estados Unidos
+3|México
+4|Guatemala
+5|Honduras
+6|El Salvador
+7|Nicaragua
+8|Costa Rica
+9|Panamá
+10|Colombia
+11|Venezuela
+12|Ecuador
+13|Perú
+14|Bolivia
+15|Paraguay
+16|Chile
+17|Argentina
+18|Uruguay
+19|Brasil

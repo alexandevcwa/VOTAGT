@@ -1,0 +1,9 @@
+com.votagt.model.dto.Candidato|id_PK|-1
+com.votagt.model.dto.Departamento|id_PK|-1
+com.votagt.model.dto.Eleccion|id_PK|-1
+com.votagt.model.dto.EleccionDetalle|id_PK|-1
+com.votagt.model.dto.Municipio|id_PK|-1
+com.votagt.model.dto.Pais|id_PK|-1
+com.votagt.model.dto.Rol|id_PK|-1
+com.votagt.model.dto.Usuario|id_PK|11
+com.votagt.model.dto.Voto|id_PK|-1
