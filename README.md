@@ -5,3 +5,6 @@ Su propósito principal es ofrecer una plataforma confiable para llevar a cabo d
 elecciones políticas hasta encuestas comunitarias.
 
 ![votagt-banner](images/votagt_login.png)
+
+## Libreria base para el mapeo de objetos como archivos de texto plano
+[GitHub - AlexanDev_CWA - ORMFile (Click Here)](https://github.com/alexandevcwa/ORMFile)
