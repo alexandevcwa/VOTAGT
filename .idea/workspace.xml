@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3e53df93-0121-4335-9e2f-b111e3cc411e" name="Changes" comment="Se creo funcionalidad para registrar a usuarios y votantes en el sistema" />
+    <list default="true" id="3e53df93-0121-4335-9e2f-b111e3cc411e" name="Changes" comment="Se creo funcionalidad para registrar a usuarios y votantes en el sistema">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/MANIFEST.MF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -92,6 +96,7 @@
       <workItem from="1698459941171" duration="28312000" />
       <workItem from="1698489019688" duration="3617000" />
       <workItem from="1698493653289" duration="658000" />
+      <workItem from="1698506781329" duration="3611000" />
     </task>
     <task id="LOCAL-00001" summary="Funcionalidad de Login">
       <option name="closed" value="true" />
